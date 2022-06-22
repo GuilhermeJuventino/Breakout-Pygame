@@ -1,4 +1,5 @@
 import pygame, sys
+import constants as c
 
 # importing the game states
 from states.menu import Menu
@@ -9,7 +10,8 @@ from game import Game
 
 # initializing pygame and setting the screen resolution
 pygame.init()
-window = pygame.display.set_mode((800, 600))
+window = pygame.display.set_mode((c.WIDTH, c.HEIGHT))
+pygame.display.set_caption("Pygame Breakout")
 
 # Game states
 states = {

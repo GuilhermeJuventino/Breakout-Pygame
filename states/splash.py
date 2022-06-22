@@ -10,6 +10,14 @@ class Splash(BaseState):
         self.next_state = "MENU"
         self.time_active = 0
 
+    def get_event(self, event):
+        if event.type == pygame.QUIT:
+            self.quit = True
+
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_RETURN:
+                self.done = True
+
     def update(self, dt):
         self.time_active += dt
 
