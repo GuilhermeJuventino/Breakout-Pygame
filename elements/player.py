@@ -8,7 +8,7 @@ class Player(BaseObject):
     def __init__(self):
         super(Player, self).__init__()
         self.x = 1280 / 2
-        self.y = 650
+        self.y = 688
         self.width = 120
         self.height = 27
         self.speed = 5
