@@ -23,6 +23,15 @@ class GamePlay(BaseState):
             if event.key == pygame.K_ESCAPE:
                 self.done = True
 
+    def handle_collisions(self):
+        self.ball.collide_with(self.player)
+
+        for block in self.block_group:
+            self.ball.collide_with(block)
+
+            if self.ball.rect.colliderect(block):
+                block.kill()
+
     def draw(self, window):
         window.fill(pygame.Color("lightblue"))
         self.player.draw(window)
@@ -33,4 +42,4 @@ class GamePlay(BaseState):
         self.player.update()
         self.ball.update()
 
-        self.ball.collide_with(self.player)
+        self.handle_collisions()
