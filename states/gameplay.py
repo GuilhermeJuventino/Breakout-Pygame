@@ -32,8 +32,9 @@ class GamePlay(BaseState):
             if self.ball.rect.colliderect(block):
                 block.kill()
 
+
     def draw(self, window):
-        window.fill(pygame.Color("lightblue"))
+        window.fill(pygame.Color("black"))
         self.player.draw(window)
         self.block_group.draw(window)
         self.ball.draw(window)

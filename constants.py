@@ -22,10 +22,10 @@ COLOR_LEGEND = {
     "3": "red",
     "4": "orange",
     "5": "purple",
-    "6": "bronze",
+    "6": "chocolate",
     "7": "grey"
 }
 
 GAP_SIZE = 2
-BLOCK_WIDTH = WIDTH / len(BLOCK_MAP) - GAP_SIZE
+BLOCK_WIDTH = WIDTH / len(BLOCK_MAP) - 35 - GAP_SIZE
 BLOCK_HEIGHT = HEIGHT / len(BLOCK_MAP[0]) - GAP_SIZE

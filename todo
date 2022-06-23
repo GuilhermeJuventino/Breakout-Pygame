@@ -3,24 +3,20 @@
 
 # TODO
 
-1) Create the player pad.
-
-2) Create the ball.
-
-3) Create the blocks.
-
-4) Create a collision system.
+1) Create the blocks.
 
 
 # In Progress
 
-1) Create the player pad.
-
-2) Create the ball.
-
-3) Create the blocks.
+1) Create the blocks.
 
 
 # Complete
 
 1) Create a window.
+
+2) Create the player pad.
+
+3) Create the ball.
+
+4) Create a collision system.
