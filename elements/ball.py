@@ -42,25 +42,6 @@ class Ball(BaseObject):
     def draw(self, window):
         pygame.draw.circle(window, pygame.Color("blue"), (self.rect.center), self.radius)
 
-    def collide_with(self, target):
-        '''if self.rect.colliderect(target.rect):
-
-            # Collisions left and right.
-            if abs(self.rect.right - target.rect.left) < 10 and self.speed_x > 0:
-                self.speed_x *= -1
-
-            elif abs(self.rect.left - target.rect.right) < 10 and self.speed_x < 0:
-                self.speed_x *= -1
-
-        if self.rect.colliderect(target.rect):
-
-            # Collisions top and bottom.
-            if abs(self.rect.bottom - target.rect.top) < 10 and self.speed_y > 0:
-                self.speed_y *= -1
-
-            elif abs(self.rect.top - target.rect.bottom) < 10 and self.speed_y < 0:
-                self.speed_y *= -1'''
-
     def collision(self, direction):
         collision_sprites = pygame.sprite.spritecollide(self, self.obstacles, False)
 
