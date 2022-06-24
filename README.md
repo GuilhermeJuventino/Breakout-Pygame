@@ -3,5 +3,5 @@
 
 # Gameplay footage
  Still in progress...
-![](../../Game Gifs/Breakout gif 04.gif)
+ <img height="720" src="../../Game Gifs/Breakout gif 04.gif" width="1280"/>
 
