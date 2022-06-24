@@ -3,5 +3,5 @@
 
 # Gameplay footage
  Still in progress...
- <img height="720" src="../../Game Gifs/Breakout gif 04.gif" width="1280"/>
+ <img height="720" src="C:\Users\Clécio\Downloads\gui\Game Gifs\Breakout gif 04.gif/>
 
