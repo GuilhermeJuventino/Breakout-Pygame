@@ -5,7 +5,7 @@ from .base import BaseObject
 
 
 class Player(BaseObject):
-    def __init__(self):
+    def __init__(self, groups, obstacles):
         super(Player, self).__init__()
         self.x = 1280 / 2
         self.y = 688
@@ -15,8 +15,14 @@ class Player(BaseObject):
         self.speed_x = 0
         self.rect = pygame.Rect((0, 0), (self.width, self.height))
         self.rect.center = (self.x, self.y)
+        self.old_rect = self.rect.copy()
+        self.groups = groups
+        self.obstacles = obstacles
 
     def update(self):
+        # Previous frame
+        self.old_rect = self.rect.copy()
+
         self.keystate = pygame.key.get_pressed()
 
         # Handling player movement
@@ -29,6 +35,7 @@ class Player(BaseObject):
         else:
             self.speed_x = 0
 
+        # Current frame (x position)
         self.rect.x += self.speed_x
 
         # Preventing player from leaving the screen
@@ -38,5 +45,11 @@ class Player(BaseObject):
         elif self.rect.left <= 0:
             self.rect.left = 0
 
+        #self.collision("test")
+
     def draw(self, window):
         pygame.draw.rect(window, pygame.Color("white"), self.rect)
+
+    def collision(self, direction):
+        collision_sprites = pygame.sprite.spritecollide(self, self.obstacles, False)
+        #print(collision_sprites)
