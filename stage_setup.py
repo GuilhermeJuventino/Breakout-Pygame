@@ -4,7 +4,7 @@ import constants as c
 from elements.block import Block
 
 
-def StageSetup():
+def stage_setup():
     # Cycle trough all rows and columns in BLOCK_MAP
     block_group = pygame.sprite.Group()
 
