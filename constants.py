@@ -14,7 +14,8 @@ BLOCK_MAP = [
     "            ",
     "            ",
     "            ",
-    "            "]
+    "            ",
+]
 
 COLOR_LEGEND = {
     "1": "blue",
@@ -23,7 +24,7 @@ COLOR_LEGEND = {
     "4": "orange",
     "5": "purple",
     "6": "chocolate",
-    "7": "grey"
+    "7": "grey",
 }
 
 GAP_SIZE = 2

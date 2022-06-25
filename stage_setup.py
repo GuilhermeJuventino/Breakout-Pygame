@@ -14,7 +14,11 @@ def stage_setup(groups, obstacles):
             if col != " ":
                 # Find the x and y position of each individual block
                 x = col_index * (c.BLOCK_WIDTH + c.GAP_SIZE) + c.GAP_SIZE // 2
-                y = c.TOP_OFFSET + row_index * (c.BLOCK_HEIGHT + c.GAP_SIZE) + c.GAP_SIZE // 2
+                y = (
+                    c.TOP_OFFSET
+                    + row_index * (c.BLOCK_HEIGHT + c.GAP_SIZE)
+                    + c.GAP_SIZE // 2
+                )
                 block = Block(col, (x, y), groups, obstacles)
                 block_group.add(block)
 
