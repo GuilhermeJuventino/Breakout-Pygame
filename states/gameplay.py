@@ -117,4 +117,5 @@ class GamePlay(BaseState):
                 self.done = True
 
             if not self.block_group:
-                pass
+                self.status = "winner"
+                self.done = True

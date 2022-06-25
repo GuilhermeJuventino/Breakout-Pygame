@@ -31,20 +31,13 @@ class Ball(BaseObject):
         if self.active:
             self.rect.x += self.speed_x
             self.collision("horizontal")
+            self.collision_window("horizontal")
             self.rect.x = round(self.rect.x)
 
             self.rect.y += self.speed_y
             self.collision("vertical")
+            self.collision_window("vertical")
             self.rect.y = round(self.rect.y)
-
-            if self.rect.left <= 0 or self.rect.right >= c.WIDTH:
-                self.speed_x *= -1
-
-            if self.rect.top <= c.TOP_OFFSET:
-                self.speed_y *= -1
-
-            if self.rect.bottom >= c.HEIGHT:
-                self.reset_ball()
 
         if not self.active:
             # Sticking the ball to the player pad
@@ -123,3 +116,24 @@ class Ball(BaseObject):
                         self.rect.top = sprite.rect.bottom + 1
                         self.rect.y = self.rect.y
                         self.speed_y *= -1
+
+    def collision_window(self, direction):
+        if direction == "horizontal":
+            if self.rect.left < 0:
+                self.rect.left = 0
+                self.rect.x = self.rect.x
+                self.speed_x *= -1
+
+            if self.rect.right > c.WIDTH:
+                self.rect.right = c.WIDTH
+                self.rect.x = self.rect.x
+                self.speed_x *= -1
+
+        if direction == "vertical":
+            if self.rect.top <= c.TOP_OFFSET:
+                self.rect.top = c.TOP_OFFSET
+                self.rect.y = self.rect.y
+                self.speed_y *= -1
+
+            if self.rect.top > c.HEIGHT:
+                self.reset_ball()

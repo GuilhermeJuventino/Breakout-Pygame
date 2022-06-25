@@ -1,15 +1,13 @@
-# GOAL: Have the base game of Breakout finished by the end of the week.
+# GOAL: Have the base game of Breakout finished by the end of the week. (COMPLETE)
 
 
 # TODO
 
-1) Create a game over system
-
+(none)
 
 # In Progress
 
-1) Create a game over system
-
+(none)
 
 # Complete
 
@@ -22,6 +20,10 @@
 4) Create a collision system
 
 5) Create the blocks
+
+6) Create a game over system
+
+7) Convert the game to .exe
 
 
 # Possible ideas for polishing the game (After it's finished)
