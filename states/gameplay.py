@@ -1,6 +1,6 @@
 import pygame
 
-from elements import player, ball, block as b
+from elements import player, ball
 from stage_setup import stage_setup
 from .base import BaseState
 
@@ -9,7 +9,6 @@ class GamePlay(BaseState):
     def __init__(self):
         super(GamePlay, self).__init__()
         self.next_state = "GAMEOVER"
-        self.score = 0
 
         # Used to determine if the player has lost or won
         self.status = ""
@@ -28,6 +27,15 @@ class GamePlay(BaseState):
         self.all_sprites.add(self.player, self.block_group)
         self.collide_sprites.add(self.block_group)
 
+        # Text setup
+        self.score = self.player.score
+        self.score_text = self.font.render(f"Score: {self.score}", True, pygame.Color("White"))
+        self.score_rect = self.score_text.get_rect(center=(40, 25))
+
+        self.lives = self.player.lives
+        self.lives_text = self.font.render(f"Lives: {self.lives}", True, pygame.Color("White"))
+        self.lives_rect = self.lives_text.get_rect(center=(1238, 25))
+
     def get_event(self, event):
         if event.type == pygame.QUIT:
             self.quit = True
@@ -36,17 +44,24 @@ class GamePlay(BaseState):
             if event.key == pygame.K_ESCAPE:
                 self.done = True
 
-
     def draw(self, window):
         window.fill(pygame.Color("black"))
         self.player.draw(window)
         self.block_group.draw(window)
         self.ball.draw(window)
-
-        '''pygame.draw.rect(window, pygame.Color("red"), self.player.old_rect)
-        pygame.draw.rect(window, pygame.Color("white"), self.ball.old_rect)'''
+        window.blit(self.score_text, self.score_rect)
+        window.blit(self.lives_text, self.lives_rect)
 
     def update(self, dt):
+        # Updating the lives text
+        self.lives = self.player.lives
+        self.lives_text = self.font.render(f"Lives: {self.lives}", True, pygame.Color("White"))
+
+        # Updating the score text
+        self.score = self.player.score
+        self.score_text = self.font.render(f"Score: {self.score}", True, pygame.Color("White"))
+
+        # Updating the game objects
         self.player.update()
         self.block_group.update()
         self.ball.update()

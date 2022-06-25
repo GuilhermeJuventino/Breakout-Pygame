@@ -5,16 +5,18 @@ from .base import BaseObject
 from.block import damage_block
 from random import randrange as rnd
 
+
 class Ball(BaseObject):
     def __init__(self, groups, obstacles, player):
         super(Ball, self).__init__()
-        self.x = c.WIDTH / 2
-        self.y = c.HEIGHT / 2
         self.radius = 12
         self.ball_rect = int(self.radius * 2 ** 0.5)
         self.rect = pygame.Rect(rnd(self.ball_rect, c.WIDTH - self.ball_rect), c.HEIGHT // 2, self.ball_rect, self.ball_rect)
-        self.speed_x = 5
-        self.speed_y = 5
+        self.speed_x = 0
+        self.speed_y = 0
+        self.speed = 5
+        self.active = False
+        self.aim = "right"
         self.old_rect = self.rect.copy()
         self.groups = groups
         self.obstacles = obstacles
@@ -25,22 +27,55 @@ class Ball(BaseObject):
         self.old_rect = self.rect.copy()
 
         # Current frame (x, y positions)
-        self.rect.x += self.speed_x
-        self.collision("horizontal")
-        self.rect.x = round(self.rect.x)
 
-        self.rect.y += self.speed_y
-        self.collision("vertical")
-        self.rect.y = round(self.rect.y)
+        if self.active:
+            self.rect.x += self.speed_x
+            self.collision("horizontal")
+            self.rect.x = round(self.rect.x)
 
-        if self.rect.left <= 0 or self.rect.right >= c.WIDTH:
-            self.speed_x *= -1
+            self.rect.y += self.speed_y
+            self.collision("vertical")
+            self.rect.y = round(self.rect.y)
 
-        if self.rect.top <= 0 or self.rect.bottom >= c.HEIGHT:
-            self.speed_y *= -1
+            if self.rect.left <= 0 or self.rect.right >= c.WIDTH:
+                self.speed_x *= -1
+
+            if self.rect.top <= c.TOP_OFFSET:
+                self.speed_y *= -1
+
+            if self.rect.bottom >= c.HEIGHT:
+                self.reset_ball()
+
+        if not self.active:
+            self.rect.centerx = self.player.rect.centerx
+            self.rect.bottom = self.player.rect.top
+
+            if self.player.keystate[pygame.K_LEFT] and not self.player.keystate[pygame.K_RIGHT]:
+                self.aim = "left"
+
+            if self.player.keystate[pygame.K_RIGHT] and not self.player.keystate[pygame.K_LEFT]:
+                self.aim = "right"
+
+            if self.player.keystate[pygame.K_SPACE]:
+                if self.aim == "left":
+                    self.speed_x = -self.speed
+                    self.speed_y = -self.speed
+
+                elif self.aim == "right":
+                    self.speed_x = self.speed
+                    self.speed_y = -self.speed
+
+                self.active = True
+
+    def reset_ball(self):
+        if self.player.lives > 0:
+            self.player.lives -= 1
+
+            if self.player.lives != 0:
+                self.active = False
 
     def draw(self, window):
-        pygame.draw.circle(window, pygame.Color("blue"), (self.rect.center), self.radius)
+        pygame.draw.circle(window, pygame.Color("lightblue"), (self.rect.center), self.radius)
 
     def collision(self, direction):
         collision_sprites = pygame.sprite.spritecollide(self, self.obstacles, False)
@@ -53,6 +88,7 @@ class Ball(BaseObject):
                 for sprite in collision_sprites:
                     if getattr(sprite, 'health', None):
                         damage_block(sprite)
+                        self.player.score += 1
 
                     # Collision on the right
                     if self.rect.right >= sprite.rect.left and self.old_rect.right <= sprite.old_rect.left:
@@ -71,6 +107,7 @@ class Ball(BaseObject):
                 for sprite in collision_sprites:
                     if getattr(sprite, 'health', None):
                         damage_block(sprite)
+                        self.player.score += 1
 
                     # Collision on the bottom
                     if self.rect.bottom >= sprite.rect.top and self.old_rect.bottom <= sprite.old_rect.top:

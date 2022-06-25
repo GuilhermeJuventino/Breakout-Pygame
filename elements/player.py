@@ -18,6 +18,8 @@ class Player(BaseObject):
         self.old_rect = self.rect.copy()
         self.groups = groups
         self.obstacles = obstacles
+        self.lives = 3
+        self.score = 0
 
     def update(self):
         # Previous frame
@@ -45,11 +47,5 @@ class Player(BaseObject):
         elif self.rect.left <= 0:
             self.rect.left = 0
 
-        #self.collision("test")
-
     def draw(self, window):
         pygame.draw.rect(window, pygame.Color("white"), self.rect)
-
-    def collision(self, direction):
-        collision_sprites = pygame.sprite.spritecollide(self, self.obstacles, False)
-        #print(collision_sprites)
