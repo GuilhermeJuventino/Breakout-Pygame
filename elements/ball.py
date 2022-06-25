@@ -2,7 +2,7 @@ import pygame
 import constants as c
 
 from .base import BaseObject
-from.block import damage_block
+from .block import damage_block
 from random import randrange as rnd
 
 
@@ -47,15 +47,18 @@ class Ball(BaseObject):
                 self.reset_ball()
 
         if not self.active:
+            # Sticking the ball to the player pad
             self.rect.centerx = self.player.rect.centerx
             self.rect.bottom = self.player.rect.top
 
+            # Aiming the ball
             if self.player.keystate[pygame.K_LEFT] and not self.player.keystate[pygame.K_RIGHT]:
                 self.aim = "left"
 
             if self.player.keystate[pygame.K_RIGHT] and not self.player.keystate[pygame.K_LEFT]:
                 self.aim = "right"
 
+            # Shooting the ball
             if self.player.keystate[pygame.K_SPACE]:
                 if self.aim == "left":
                     self.speed_x = -self.speed

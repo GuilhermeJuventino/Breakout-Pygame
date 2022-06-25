@@ -13,15 +13,15 @@
 
 # Complete
 
-1) Create a window.
+1) Create a window
 
-2) Create the player pad.
+2) Create the player pad
 
-3) Create the ball.
+3) Create the ball
 
-4) Create a collision system.
+4) Create a collision system
 
-5) Create the blocks.
+5) Create the blocks
 
 
 # Possible ideas for polishing the game (After it's finished)
@@ -30,10 +30,8 @@
 
 2) Add a motion blur (alpha aftereffect) for the ball and/or the platform
 
-3) add screen shake when the ball hits
+3) Add screen shake when the ball hits
 
-4) make a crumbling effect for the blocks when breaking
+4) Make a crumbling effect for the blocks when breaking
 
-5) add a better background color, preferably gray
-
-6) make the ball white or green
+5) Make a system that allows for different levels

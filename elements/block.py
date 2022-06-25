@@ -5,7 +5,7 @@ from .base import BaseObject
 
 
 class Block(BaseObject):
-    def __init__(self, block_type, pos, groups, obstacles, ball):
+    def __init__(self, block_type, pos, groups, obstacles):
         super(Block, self).__init__()
         self.type = block_type
         self.pos = pos
@@ -17,7 +17,6 @@ class Block(BaseObject):
         self.old_rect = self.rect.copy()
         self.groups = groups
         self.obstacles = obstacles
-        self.ball = ball
 
     def update(self):
         self.old_rect = self.rect.copy()
