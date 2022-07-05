@@ -3,6 +3,7 @@ import constants as c
 
 from .base import BaseObject
 from .block import damage_block
+from .particles import CollisionParticles
 from random import randrange as rnd
 
 
@@ -17,7 +18,6 @@ class Ball(BaseObject):
         self.speed = 5
         self.active = False
         self.aim = "right"
-        self.old_rect = self.rect.copy()
         self.groups = groups
         self.obstacles = obstacles
         self.player = player
@@ -88,12 +88,16 @@ class Ball(BaseObject):
 
                     # Collision on the right
                     if self.rect.right >= sprite.rect.left and self.old_rect.right <= sprite.old_rect.left:
+                        self.particle = CollisionParticles((sprite.rect.left, self.rect.y), "left", sprite.color,
+                                                           self.groups, self.obstacles, self.player)
                         self.rect.right = sprite.rect.left - 1
                         self.rect.x = self.rect.x
                         self.speed_x *= -1
 
                     # Collision on the left
                     if self.rect.left <= sprite.rect.right and self.old_rect.left >= sprite.old_rect.right:
+                        self.particle = CollisionParticles((sprite.rect.right, self.rect.y), "right", sprite.color,
+                                                           self.groups, self.obstacles, self.player)
                         self.rect.left = sprite.rect.right + 1
                         self.rect.x = self.rect.x
                         self.speed_x *= -1
@@ -107,12 +111,16 @@ class Ball(BaseObject):
 
                     # Collision on the bottom
                     if self.rect.bottom >= sprite.rect.top and self.old_rect.bottom <= sprite.old_rect.top:
+                        self.particle = CollisionParticles((self.rect.x, sprite.rect.top), "up", sprite.color,
+                                                           self.groups, self.obstacles, self.player)
                         self.rect.bottom = sprite.rect.top - 1
                         self.rect.y = self.rect.y
                         self.speed_y *= -1
 
                     # Collision on the top
                     if self.rect.top <= sprite.rect.bottom and self.old_rect.top >= sprite.old_rect.bottom:
+                        self.particle = CollisionParticles((self.rect.x, sprite.rect.bottom), "down", sprite.color,
+                                                           self.groups, self.obstacles, self.player)
                         self.rect.top = sprite.rect.bottom + 1
                         self.rect.y = self.rect.y
                         self.speed_y *= -1

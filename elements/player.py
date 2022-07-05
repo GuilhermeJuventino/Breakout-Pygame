@@ -15,6 +15,9 @@ class Player(BaseObject):
         self.speed_x = 0
         self.rect = pygame.Rect((0, 0), (self.width, self.height))
         self.rect.center = (self.x, self.y)
+        self.color = pygame.Color("white")
+        self.image = pygame.Surface((self.rect.width, self.rect.height))
+        self.image.fill(self.color)
         self.old_rect = self.rect.copy()
         self.groups = groups
         self.obstacles = obstacles
@@ -47,5 +50,3 @@ class Player(BaseObject):
         elif self.rect.left <= 0:
             self.rect.left = 0
 
-    def draw(self, window):
-        pygame.draw.rect(window, pygame.Color("white"), self.rect)

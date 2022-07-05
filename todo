@@ -1,13 +1,23 @@
-# GOAL: Have the base game of Breakout finished by the end of the week. (COMPLETE)
+# GOAL: Have a version 2 of the game ready by day 16
 
 
 # TODO
 
-(none)
+1) Add particles
+
+2) Add screen shake when the ball hits
+
+3) Make a system that allows for different levels
+
+4) Improve graphics (By adding sprites maybe?)
+
+5) Add a glow for the ball, maybe even the platform
+
 
 # In Progress
 
-(none)
+1) Add particles
+
 
 # Complete
 

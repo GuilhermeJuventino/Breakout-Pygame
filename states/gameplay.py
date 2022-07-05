@@ -85,8 +85,9 @@ class GamePlay(BaseState):
         window.fill(pygame.Color("black"))
 
         # Drawing the game objects
-        self.player.draw(window)
-        self.block_group.draw(window)
+        '''self.player.draw(window)
+        self.block_group.draw(window)'''
+        self.all_sprites.draw(window)
         self.ball.draw(window)
 
         # Drawing the ui text
@@ -108,8 +109,9 @@ class GamePlay(BaseState):
             self.score_text = self.ui_font.render(f"Score: {self.score}", True, pygame.Color("White"))
 
             # Updating the game objects
-            self.player.update()
-            self.block_group.update()
+            '''self.player.update()
+            self.block_group.update()'''
+            self.all_sprites.update()
             self.ball.update()
 
             if self.player.lives == 0:

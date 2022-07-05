@@ -24,9 +24,6 @@ class Block(BaseObject):
         self.image.fill(self.color)
         self.rect = self.image.get_rect(topleft=self.pos)
 
-    def draw(self, window):
-        pygame.draw.rect(window, pygame.Color(self.color), self.rect)
-
     def damage(self):
         if self.health > 0:
             self.health -= 1
