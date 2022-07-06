@@ -1,3 +1,4 @@
+import asyncio
 import pygame, sys
 import constants as c
 
@@ -24,8 +25,4 @@ states = {
 
 # Game class instance
 game = Game(window, states, "SPLASH")
-game.run()
-
-# Closing the game
-pygame.quit()
-sys.exit()
+asyncio.run(game.run())

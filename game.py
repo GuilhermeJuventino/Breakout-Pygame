@@ -1,3 +1,4 @@
+import asyncio
 import pygame
 
 
@@ -36,10 +37,14 @@ class Game(object):
     def draw(self):
         self.state.draw(self.window)
 
-    def run(self):
+    async def run(self):
         while not self.done:
             dt = self.clock.tick(self.fps)
             self.event_loop()
             self.update(dt)
             self.draw()
             pygame.display.update()
+            await asyncio.sleep(0)
+        # Closing the game
+        pygame.quit()
+        sys.exit()
