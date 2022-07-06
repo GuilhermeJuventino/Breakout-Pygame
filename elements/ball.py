@@ -5,12 +5,16 @@ from .base import BaseObject
 from .block import damage_block
 from .particles import CollisionParticles
 from.screenshake import ScreenShake
+from elements.sound_effect import SoundEffect
 from random import randrange as rnd
 
 
 class Ball(BaseObject):
     def __init__(self, groups, obstacles, player, surf_rect):
         super(Ball, self).__init__()
+        self.block_collision_sound = SoundEffect(c.IMPACT_1)
+        self.player_collision_sound = SoundEffect(c.IMPACT_2)
+        self.shoot_sound = SoundEffect(c.SHOOT_BALL_SOUND)
         self.surf_rect = surf_rect
         self.radius = 12
         self.ball_rect = int(self.radius * 2 ** 0.5)
@@ -56,6 +60,8 @@ class Ball(BaseObject):
 
             # Shooting the ball
             if self.player.keystate[pygame.K_SPACE]:
+                self.shoot_sound.play()
+
                 if self.aim == "left":
                     self.speed_x = -self.speed
                     self.speed_y = -self.speed
@@ -82,12 +88,14 @@ class Ball(BaseObject):
         collision_sprites = pygame.sprite.spritecollide(self, self.obstacles, False)
 
         if self.rect.colliderect(self.player.rect):
+            self.player_collision_sound.play()
             collision_sprites.append(self.player)
 
         if collision_sprites:
             if direction == "horizontal":
                 for sprite in collision_sprites:
                     if getattr(sprite, 'health', None):
+                        self.block_collision_sound.play()
                         self.screen.timer = 15
                         damage_block(sprite)
                         self.player.score += 1
@@ -112,6 +120,7 @@ class Ball(BaseObject):
             if direction == "vertical":
                 for sprite in collision_sprites:
                     if getattr(sprite, 'health', None):
+                        self.block_collision_sound.play()
                         self.screen.timer = 15
                         damage_block(sprite)
                         self.player.score += 1

@@ -1,10 +1,15 @@
 import pygame
+import constants as c
+
 from .base import BaseState
+from elements.sound_effect import SoundEffect
 
 
 class Menu(BaseState):
     def __init__(self):
         super(Menu, self).__init__()
+        self.navigation_sound = SoundEffect(c.NAVIGATION_SOUND)
+        self.confirm_sound = SoundEffect(c.CONFIRM_SOUND)
         self.active_index = 0
         self.options = ["Start game", "Quit game"]
         self.next_state = "GAMEPLAY"
@@ -19,6 +24,7 @@ class Menu(BaseState):
 
     def handle_action(self):
         if self.active_index == 0:
+            self.confirm_sound.play()
             self.done = True
 
         elif self.active_index == 1:
@@ -31,9 +37,11 @@ class Menu(BaseState):
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 self.active_index = 1 if self.active_index <= 0 else 0
+                self.navigation_sound.play()
 
             elif event.key == pygame.K_DOWN:
                 self.active_index = 0 if self.active_index >= 1 else 1
+                self.navigation_sound.play()
 
             elif event.key == pygame.K_RETURN:
                 self.handle_action()

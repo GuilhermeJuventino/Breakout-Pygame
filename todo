@@ -5,25 +5,24 @@
 
 1) Add particles
 
-2) Add screen shake when the ball hits
+2) Make a system that allows for different levels
 
-3) Make a system that allows for different levels
+3) Improve graphics (By adding sprites maybe?)
 
-4) Improve graphics (By adding sprites maybe?)
-
-5) Add a glow for the ball, maybe even the platform
-
-6) Add sound effects
+4) Add a glow for the ball, maybe even the platform
 
 
 # In Progress
 
 1) Add particles
 
-2) Add screen shake when the ball hits
-
 
 # Complete
+
+1) Add screen shake when the ball hits
+
+2) Add sound effects
+
 
 1) Create a window
 

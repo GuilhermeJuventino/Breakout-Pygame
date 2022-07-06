@@ -2,6 +2,7 @@ import pygame
 import constants as c
 
 from elements import player, ball
+from elements.sound_effect import SoundEffect
 from stage_setup import stage_setup
 from .base import BaseState
 
@@ -10,6 +11,8 @@ class GamePlay(BaseState):
     def __init__(self):
         super(GamePlay, self).__init__()
         self.next_state = "GAMEOVER"
+
+        self.pause_sound = SoundEffect(c.CONFIRM_SOUND)
 
         # Used to determine if the player has lost or won
         self.status = ""
@@ -52,6 +55,7 @@ class GamePlay(BaseState):
 
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_ESCAPE or event.key == pygame.K_RETURN:
+                self.pause_sound.play()
                 if not self.paused:
                     self.paused = True
 

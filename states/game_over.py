@@ -1,10 +1,14 @@
 import pygame
+import constants as c
+
 from .base import BaseState
+from elements.sound_effect import SoundEffect
 
 
 class GameOver(BaseState):
     def __init__(self):
         super(GameOver, self).__init__()
+        self.confirm_sound = SoundEffect(c.CONFIRM_SOUND)
         self.title_font = pygame.font.Font(None, 40)
         self.title = self.title_font.render("Game over", True, pygame.Color("white"))
         self.title_rect = self.title.get_rect(center=self.window_rect.center)
@@ -25,10 +29,12 @@ class GameOver(BaseState):
 
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
+                self.confirm_sound.play()
                 self.next_state = "GAMEPLAY"
                 self.done = True
 
             elif event.key == pygame.K_RETURN:
+                self.confirm_sound.play()
                 self.next_state = "MENU"
                 self.done = True
 

@@ -10,6 +10,7 @@ from game import Game
 
 # initializing pygame and setting the screen resolution
 pygame.init()
+pygame.mixer.init()
 window = pygame.display.set_mode((c.WIDTH, c.HEIGHT))
 pygame.display.set_caption("Pygame Breakout")
 
