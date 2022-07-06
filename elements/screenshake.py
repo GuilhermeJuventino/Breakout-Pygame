@@ -2,15 +2,23 @@ from random import randrange as rnd
 
 
 # Dirty screen shake solution
-def screen_shake(window, timer):
-    shake_timer = timer
+class ScreenShake:
+    def __init__(self):
+        self.timer = 0
+        self.offset_x = 0
+        self.offset_y = 0
 
-    if shake_timer > 0:
+    def shake(self, window):
+        if self.timer > 0:
 
-        if shake_timer % 5 == 0:
-            offset_x = rnd(-8, 8)
-            offset_y = rnd(-8, 8)
+            if self.timer % 5 == 0:
+                self.offset_x = rnd(-8, 8)
+                self.offset_y = rnd(-8, 8)
 
-        shake_timer -= 1
-        window.x = offset_x
-        window.y = offset_y
+            self.timer -= 1
+            window.x = self.offset_x
+            window.y = self.offset_y
+
+        else:
+            self.offset_x = 0
+            self.offset_y = 0

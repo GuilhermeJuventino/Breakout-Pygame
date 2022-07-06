@@ -4,7 +4,7 @@ import constants as c
 from .base import BaseObject
 from .block import damage_block
 from .particles import CollisionParticles
-from.screenshake import screen_shake
+from.screenshake import ScreenShake
 from random import randrange as rnd
 
 
@@ -23,6 +23,7 @@ class Ball(BaseObject):
         self.groups = groups
         self.obstacles = obstacles
         self.player = player
+        self.screen = ScreenShake()
 
     def update(self):
         # Previous frame
@@ -65,6 +66,8 @@ class Ball(BaseObject):
 
                 self.active = True
 
+        self.screen.shake(self.surf_rect)
+
     def reset_ball(self):
         if self.player.lives > 0:
             self.player.lives -= 1
@@ -85,7 +88,7 @@ class Ball(BaseObject):
             if direction == "horizontal":
                 for sprite in collision_sprites:
                     if getattr(sprite, 'health', None):
-                        screen_shake(self.surf_rect, 60)
+                        self.screen.timer = 15
                         damage_block(sprite)
                         self.player.score += 1
 
@@ -109,7 +112,7 @@ class Ball(BaseObject):
             if direction == "vertical":
                 for sprite in collision_sprites:
                     if getattr(sprite, 'health', None):
-                        screen_shake(self.surf_rect, 60)
+                        self.screen.timer = 15
                         damage_block(sprite)
                         self.player.score += 1
 
