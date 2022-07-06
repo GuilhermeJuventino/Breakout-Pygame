@@ -1,4 +1,5 @@
 import pygame
+import constants as c
 
 from elements import player, ball
 from stage_setup import stage_setup
@@ -16,6 +17,9 @@ class GamePlay(BaseState):
         # Used to pause the game
         self.paused = False
 
+        self.main_surface = pygame.Surface((c.WIDTH, c.HEIGHT))
+        self.main_rect = self.main_surface.get_rect()
+
         # Sprite groups
         self.all_sprites = pygame.sprite.Group()
         self.collide_sprites = pygame.sprite.Group()
@@ -23,7 +27,7 @@ class GamePlay(BaseState):
 
         # Player and ball classes
         self.player = player.Player(self.all_sprites, self.collide_sprites)
-        self.ball = ball.Ball(self.all_sprites, self.collide_sprites, self.player)
+        self.ball = ball.Ball(self.all_sprites, self.collide_sprites, self.player, self.main_rect)
 
         # Sprites setup
         self.all_sprites.add(self.player, self.block_group)
@@ -84,11 +88,13 @@ class GamePlay(BaseState):
     def draw(self, window):
         window.fill(pygame.Color("black"))
 
+        window.blit(self.main_surface, self.main_rect)
+
+        self.main_surface.fill(pygame.Color("black"))
+
         # Drawing the game objects
-        '''self.player.draw(window)
-        self.block_group.draw(window)'''
-        self.all_sprites.draw(window)
-        self.ball.draw(window)
+        self.all_sprites.draw(self.main_surface)
+        self.ball.draw(self.main_surface)
 
         # Drawing the ui text
         window.blit(self.score_text, self.score_rect)
@@ -99,6 +105,9 @@ class GamePlay(BaseState):
 
     def update(self, dt):
         if not self.paused:
+            # Reseting main_surface to default position (required for screenshake)
+            self.main_rect.topleft = (0, 0)
+
             # Updating the lives text
             self.lives = self.player.lives
             self.lives_text = self.ui_font.render(f"Lives: {self.lives}", True, pygame.Color("White"))
@@ -109,8 +118,6 @@ class GamePlay(BaseState):
             self.score_text = self.ui_font.render(f"Score: {self.score}", True, pygame.Color("White"))
 
             # Updating the game objects
-            '''self.player.update()
-            self.block_group.update()'''
             self.all_sprites.update()
             self.ball.update()
 

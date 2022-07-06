@@ -4,12 +4,14 @@ import constants as c
 from .base import BaseObject
 from .block import damage_block
 from .particles import CollisionParticles
+from.screenshake import screen_shake
 from random import randrange as rnd
 
 
 class Ball(BaseObject):
-    def __init__(self, groups, obstacles, player):
+    def __init__(self, groups, obstacles, player, surf_rect):
         super(Ball, self).__init__()
+        self.surf_rect = surf_rect
         self.radius = 12
         self.ball_rect = int(self.radius * 2 ** 0.5)
         self.rect = pygame.Rect(rnd(self.ball_rect, c.WIDTH - self.ball_rect), c.HEIGHT // 2, self.ball_rect, self.ball_rect)
@@ -83,6 +85,7 @@ class Ball(BaseObject):
             if direction == "horizontal":
                 for sprite in collision_sprites:
                     if getattr(sprite, 'health', None):
+                        screen_shake(self.surf_rect, 60)
                         damage_block(sprite)
                         self.player.score += 1
 
@@ -106,6 +109,7 @@ class Ball(BaseObject):
             if direction == "vertical":
                 for sprite in collision_sprites:
                     if getattr(sprite, 'health', None):
+                        screen_shake(self.surf_rect, 60)
                         damage_block(sprite)
                         self.player.score += 1
 
