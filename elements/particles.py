@@ -154,7 +154,7 @@ class Star(pygame.sprite.Sprite):
     def __init__(self, position):
         super(Star, self).__init__()
         self.color = (randint(1, 255), randint(1, 255), randint(1, 255))
-        self.image = pygame.Surface((1, 1))
+        self.image = pygame.Surface((randint(2, 3), randint(2, 3)))
         self.image.fill(self.color)
         self.rect = self.image.get_rect()
         self.x = position[0]
