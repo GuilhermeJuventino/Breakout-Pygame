@@ -3,26 +3,17 @@
 
 # TODO
 
-1) Add particles
+1) Make a system that allows for different levels
 
-2) Make a system that allows for different levels
-
-3) Improve graphics (By adding sprites maybe?)
-
-4) Add a glow for the ball, maybe even the platform
+2) Improve graphics (By adding sprites maybe?)
 
 
 # In Progress
 
-1) Add particles
+(none)
 
 
 # Complete
-
-1) Add screen shake when the ball hits
-
-2) Add sound effects
-
 
 1) Create a window
 
@@ -36,17 +27,17 @@
 
 6) Create a game over system
 
-7) Convert the game to .exe
+7) Add screen shake when the ball hits
+
+8) Add sound effects
+
+9) Add particles
+
+10) Convert the game to .exe
 
 
 # Possible ideas for polishing the game (After it's finished)
 
-1) Add a glow for the ball, maybe even the platform
+1) Make a crumbling effect for the blocks when breaking
 
-2) Add a motion blur (alpha aftereffect) for the ball and/or the platform
-
-3) Add screen shake when the ball hits
-
-4) Make a crumbling effect for the blocks when breaking
-
-5) Make a system that allows for different levels
+2) Make a system that allows for different levels

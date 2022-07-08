@@ -11,7 +11,7 @@ class Player(BaseObject):
         self.y = 688
         self.width = 120
         self.height = 27
-        self.speed = 5
+        self.speed = 6
         self.speed_x = 0
         self.rect = pygame.Rect((0, 0), (self.width, self.height))
         self.rect.center = (self.x, self.y)

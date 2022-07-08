@@ -16,9 +16,11 @@ class Ball(BaseObject):
         self.player_collision_sound = SoundEffect(c.IMPACT_2)
         self.shoot_sound = SoundEffect(c.SHOOT_BALL_SOUND)
         self.surf_rect = surf_rect
+        self.color = pygame.Color("lightblue")
         self.radius = 12
         self.ball_rect = int(self.radius * 2 ** 0.5)
         self.rect = pygame.Rect(rnd(self.ball_rect, c.WIDTH - self.ball_rect), c.HEIGHT // 2, self.ball_rect, self.ball_rect)
+        self.old_rect = self.rect.copy()
         self.speed_x = 0
         self.speed_y = 0
         self.speed = 5
@@ -82,7 +84,7 @@ class Ball(BaseObject):
                 self.active = False
 
     def draw(self, window):
-        pygame.draw.circle(window, pygame.Color("lightblue"), (self.rect.center), self.radius)
+        pygame.draw.circle(window, (self.color.r, self.color.g, self.color.b), (self.rect.center), self.radius)
 
     def collision(self, direction):
         collision_sprites = pygame.sprite.spritecollide(self, self.obstacles, False)

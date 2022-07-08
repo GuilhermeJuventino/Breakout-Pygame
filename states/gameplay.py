@@ -3,6 +3,7 @@ import constants as c
 
 from elements import player, ball
 from elements.sound_effect import SoundEffect
+from elements.particles import StarField
 from stage_setup import stage_setup
 from .base import BaseState
 
@@ -28,9 +29,10 @@ class GamePlay(BaseState):
         self.collide_sprites = pygame.sprite.Group()
         self.block_group = stage_setup(self.all_sprites, self.collide_sprites)
 
-        # Player and ball classes
+        # Classes
         self.player = player.Player(self.all_sprites, self.collide_sprites)
         self.ball = ball.Ball(self.all_sprites, self.collide_sprites, self.player, self.main_rect)
+        self.star_field = StarField()
 
         # Sprites setup
         self.all_sprites.add(self.player, self.block_group)
@@ -97,6 +99,7 @@ class GamePlay(BaseState):
         self.main_surface.fill(pygame.Color("black"))
 
         # Drawing the game objects
+        self.star_field.draw(self.main_surface)
         self.all_sprites.draw(self.main_surface)
         self.ball.draw(self.main_surface)
 
@@ -122,6 +125,7 @@ class GamePlay(BaseState):
             self.score_text = self.ui_font.render(f"Score: {self.score}", True, pygame.Color("White"))
 
             # Updating the game objects
+            self.star_field.update()
             self.all_sprites.update()
             self.ball.update()
 
