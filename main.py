@@ -6,6 +6,7 @@ from states.menu import Menu
 from states.gameplay import GamePlay
 from states.game_over import GameOver
 from states.splash import Splash
+from states.credits import Credits
 from game import Game
 
 # initializing pygame and setting the screen resolution
@@ -20,6 +21,7 @@ states = {
     "SPLASH": Splash(),
     "GAMEPLAY": GamePlay(),
     "GAMEOVER": GameOver(),
+    "CREDITS": Credits(),
 }
 
 # Game class instance

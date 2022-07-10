@@ -50,3 +50,5 @@ class Player(BaseObject):
         elif self.rect.left <= 0:
             self.rect.left = 0
 
+        if self.score > 9999999:
+            self.score = 9999999

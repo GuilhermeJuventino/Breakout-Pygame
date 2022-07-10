@@ -5,16 +5,6 @@ HEIGHT = 720
 
 # Block settings
 
-BLOCK_MAP = [
-    "666666666666",
-    "444557755444",
-    "333333333333",
-    "222222222222",
-    "111111111111",
-    "            ",
-    "            ",
-    "            ",
-    "            "]
 
 COLOR_LEGEND = {
     "1": "blue",
@@ -27,8 +17,8 @@ COLOR_LEGEND = {
 }
 
 GAP_SIZE = 2
-BLOCK_WIDTH = WIDTH / len(BLOCK_MAP) - 35 - GAP_SIZE
-BLOCK_HEIGHT = HEIGHT / len(BLOCK_MAP[0]) - GAP_SIZE
+'''BLOCK_WIDTH = WIDTH / len(BLOCK_MAP) - 35 - GAP_SIZE
+BLOCK_HEIGHT = HEIGHT / len(BLOCK_MAP[0]) - GAP_SIZE'''
 TOP_OFFSET = 54
 
 # Sound effects
@@ -38,3 +28,7 @@ CONFIRM_SOUND = "sfx/Confirm.wav"
 SHOOT_BALL_SOUND = "sfx/Shoot_ball.wav"
 IMPACT_1 = "sfx/Impact1.wav"
 IMPACT_2 = "sfx/Impact2.wav"
+
+# Final level
+
+FINAL_LEVEL = 2

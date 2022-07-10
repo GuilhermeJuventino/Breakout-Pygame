@@ -11,7 +11,9 @@ from .base import BaseState
 class GamePlay(BaseState):
     def __init__(self):
         super(GamePlay, self).__init__()
+        self.level = 1
         self.next_state = "GAMEOVER"
+        self.reset = False
 
         self.pause_sound = SoundEffect(c.CONFIRM_SOUND)
 
@@ -67,26 +69,33 @@ class GamePlay(BaseState):
     def startup(self, persistent):
         self.persist["score"] = 0
 
+        if persistent:
+            self.reset = persistent["reset"]
+
         # Reseting the player position
         self.player.rect.center = (self.player.x, self.player.y)
 
         # Reseting the ball's status/position
         self.ball.active = False
 
-        # Reseting the player score
-        self.score = 0
-        self.player.score = 0
+        if self.status == "loser" or self.reset:
+            # Reseting the player score
+            self.score = 0
+            self.player.score = 0
 
-        # Reseting the player's lives
-        self.lives = 3
-        self.player.lives = 3
+            # Reseting the player's lives
+            self.lives = 3
+            self.player.lives = 3
+
+            self.level = 1
 
         # Reseting the level
         if not self.block_group or self.status == "loser":
             self.all_sprites.empty()
             self.collide_sprites.empty()
             self.block_group.empty()
-            self.block_group = stage_setup(self.all_sprites, self.collide_sprites)
+            self.star_field.stars.clear()
+            self.block_group = stage_setup(self.all_sprites, self.collide_sprites, self.level)
 
             self.all_sprites.add(self.player, self.block_group)
             self.collide_sprites.add(self.block_group)
@@ -131,8 +140,22 @@ class GamePlay(BaseState):
 
             if self.player.lives == 0:
                 self.status = "loser"
+                self.persist["status"] = self.status
+                self.level = 1
+                self.persist["level"] = self.level
                 self.done = True
 
             if not self.block_group:
                 self.status = "winner"
-                self.done = True
+                self.persist["status"] = self.status
+                self.persist["level"] = self.level
+
+                self.level += 1
+
+                if self.level <= c.FINAL_LEVEL:
+                    self.next_state = "GAMEOVER"
+                    self.done = True
+
+                elif self.level > c.FINAL_LEVEL:
+                    self.next_state = "CREDITS"
+                    self.done = True

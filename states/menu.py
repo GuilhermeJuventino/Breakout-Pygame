@@ -13,6 +13,7 @@ class Menu(BaseState):
         self.active_index = 0
         self.options = ["Start game", "Quit game"]
         self.next_state = "GAMEPLAY"
+        self.level = 1
 
     def render_text(self, index):
         color = pygame.Color("red") if index == self.active_index else pygame.Color("white")
