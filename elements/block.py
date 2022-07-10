@@ -5,13 +5,13 @@ from .base import BaseObject
 
 
 class Block(BaseObject):
-    def __init__(self, block_type, pos, groups, obstacles):
+    def __init__(self, block_type, pos, groups, obstacles, width, height):
         super(Block, self).__init__()
         self.type = block_type
         self.pos = pos
         self.health = int(self.type)
         self.color = c.COLOR_LEGEND[self.type]
-        self.image = pygame.Surface((c.BLOCK_WIDTH, c.BLOCK_HEIGHT))
+        self.image = pygame.Surface((width, height))
         self.image.fill(self.color)
         self.rect = self.image.get_rect(topleft=self.pos)
         self.old_rect = self.rect.copy()

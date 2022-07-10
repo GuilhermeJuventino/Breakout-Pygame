@@ -17,8 +17,6 @@ COLOR_LEGEND = {
 }
 
 GAP_SIZE = 2
-'''BLOCK_WIDTH = WIDTH / len(BLOCK_MAP) - 35 - GAP_SIZE
-BLOCK_HEIGHT = HEIGHT / len(BLOCK_MAP[0]) - GAP_SIZE'''
 TOP_OFFSET = 54
 
 # Sound effects
