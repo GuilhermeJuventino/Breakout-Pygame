@@ -1,6 +1,6 @@
 import asyncio
 import pygame, sys
-import constants as c
+import constants as config
 
 # importing the game states
 from states.menu import Menu
@@ -11,7 +11,7 @@ from game import Game
 
 # initializing pygame and setting the screen resolution
 pygame.init()
-window = pygame.display.set_mode((c.WIDTH, c.HEIGHT))
+window = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
 pygame.display.set_caption("Pygame Breakout")
 
 # Game states
